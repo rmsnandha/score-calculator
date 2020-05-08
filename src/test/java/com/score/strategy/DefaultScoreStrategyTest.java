@@ -17,7 +17,6 @@ public class DefaultScoreStrategyTest {
     @Test
     public void testCalculateScore() {
         Function<? super String, Integer> calculateScore = defaultStrategy.calculateScore();
-
         assertSame(1, calculateScore.apply("A"));
         assertSame(0, calculateScore.apply(""));
         assertSame(2, calculateScore.apply("AA"));

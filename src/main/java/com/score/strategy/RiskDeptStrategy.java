@@ -7,7 +7,6 @@ public class RiskDeptStrategy implements  NameScoreStrategy{
     /*
      do not want to multiply with index position
      */
-
     @Override
     public ToIntFunction<? super Integer> multiplyWithScore() {
         return t->t;
