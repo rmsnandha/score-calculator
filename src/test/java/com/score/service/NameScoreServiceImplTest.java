@@ -1,14 +1,14 @@
 package com.score.service;
 
-import com.score.App;
 import com.score.factory.ScoreStrategyFactory;
 import com.score.strategy.NameScoreStrategy;
+import com.score.util.Utils;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 
@@ -29,6 +29,14 @@ public class NameScoreServiceImplTest {
     }
 
     @Test
+    public void should_returnZERO_when_no_names_passed() {
+        int score = nameScoreService.calculateScore(Collections.emptyList(), defaultScoreStrategy);
+        assertEquals(0, score);
+
+    }
+
+
+    @Test
     public void testCalculateScore_ForRiskDept_which_doNot_multiplyScore_WithIndex() {
 
         int score = nameScoreService.calculateScore(Arrays.asList("\"A\"", "\"LINDA\""), riskDeptScoreStrategy);
@@ -39,9 +47,11 @@ public class NameScoreServiceImplTest {
     @Test
     public void testFileNamesTotalCount() {
         Path path = FileSystems.getDefault().getPath("src/test/resources/names.txt").toAbsolutePath();
-        int score = nameScoreService.calculateScore(App.readFile(path.toString()), defaultScoreStrategy);
+        int score = nameScoreService.calculateScore(Utils.readFile(path.toString()), defaultScoreStrategy);
         assertEquals(871198282, score);
 
     }
+
+
 
 }
